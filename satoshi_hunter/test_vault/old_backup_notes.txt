@@ -1,0 +1,14 @@
+
+My Old Multi-Chain Crypto Notes (2017 Vault)
+--------------------------------------------
+Bitcoin Legacy Address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+Bitcoin Native SegWit: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq
+Bitcoin WIF Private Key: 5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbTLvyTJ
+HD Master Key (BIP32): xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi
+Ethereum / EVM Wallet: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+Dogecoin Wallet: DH5yaieqoZN36fDVciNyRueRGvGLR3mr7L
+Litecoin Wallet: LdP8Qox1VAhCzLJNqrr74YovaWYyNBUWvL
+Tron / USDT-TRC20 Wallet: TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL
+Mnemonic Seed Backup (BTC/ETH/SOL/MetaMask):
+army van defense carry jealous true garbage claim echo media make crunch
+        

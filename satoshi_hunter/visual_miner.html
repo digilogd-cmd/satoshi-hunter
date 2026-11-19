@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛏️ SATOSHI HUNTER : ABYSSAL RIG v2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@500;700;800&family=Pretendard:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-abyss: #06080e;
+            --steel-dark: #141821;
+            --steel-mid: #1f2633;
+            --steel-light: #333f54;
+            --brass-dark: #5c3a14;
+            --brass-mid: #9c6723;
+            --brass-bright: #d99b38;
+            --copper: #b85d3b;
+            --btc-gold: #f7931a;
+            --btc-bright: #ffd166;
+            --crt-green: #10b981;
+            --crt-bright: #34d399;
+            --crt-amber: #f59e0b;
+            --hazard-red: #ef4444;
+            --cyan-glow: #00f2fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-abyss);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(217, 155, 56, 0.08) 0%, transparent 60%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 10px);
+            color: #e2e8f0;
+            font-family: 'Pretendard', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px 60px;
+            overflow-x: hidden;
+        }
+
+        /* =========================================================
+           INDUSTRIAL PIPELINE OUTER RIG CHASSIS
+           ========================================================= */
+        .rig-chassis {
+            width: 100%;
+            max-width: 1220px;
+            background: linear-gradient(180deg, #1b222d 0%, #11151c 100%);
+            border: 4px solid #384357;
+            border-radius: 18px;
+            box-shadow: 
+                0 25px 70px rgba(0,0,0,0.95),
+                inset 0 2px 0 rgba(255,255,255,0.12),
+                inset 0 0 30px rgba(0,0,0,0.8);
+            position: relative;
+            padding: 18px;
+        }
+
+        /* Decorative Corner Rivets / Bolts */
+        .rivet {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle at 35% 35%, #64748b, #1e293b);
+            border: 2px solid #0f172a;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(255,255,255,0.15), inset 0 1px 2px rgba(0,0,0,0.8);
+            z-index: 20;
+        }
+        .rivet::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 2px;
+            width: 6px;
+            height: 2px;
+            background: #0f172a;
+            transform: rotate(35deg);
+        }
+        .rivet.tl { top: 8px; left: 8px; }
+        .rivet.tr { top: 8px; right: 8px; }
+        .rivet.bl { bottom: 8px; left: 8px; }
+        .rivet.br { bottom: 8px; right: 8px; }
+
+        /* Top Hazard Stripe Bar */
+        .hazard-trim {
+            height: 8px;
+            width: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                #f59e0b,
+                #f59e0b 14px,
+                #11151c 14px,
+                #11151c 28px
+            );
+            border-radius: 4px;
+            margin-bottom: 14px;
+            border: 1px solid #000;
+            opacity: 0.85;
+        }
+
+        /* =========================================================
+           HEADER CONTROL DECK
+           ========================================================= */
+        .header-deck {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, #131822 0%, #0d1118 100%);
+            border: 2px solid #2c3545;
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 16px;
+            box-shadow: inset 0 4px 12px rgba(0,0,0,0.7);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .brand-plate {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .gear-badge {
+            width: 54px;
+            height: 54px;
+            background: radial-gradient(circle, #2b1d0c 0%, #140d05 100%);
+            border: 3px solid var(--brass-bright);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 18px rgba(247, 147, 26, 0.35), inset 0 0 10px rgba(247, 147, 26, 0.4);
+            position: relative;
+        }
+
+        .brand-titles h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.15rem;
+            color: var(--btc-gold);
+            text-shadow: 0 0 12px rgba(247, 147, 26, 0.6), 2px 2px 0px #000;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .brand-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tag-pill {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid var(--brass-bright);
+            color: var(--btc-bright);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Top Right Analog Gauges & Switches */
+        .telemetry-cluster {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .gauge-pod {
+            background: #080b10;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.9);
+        }
+
+        .gauge-dial {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--brass-mid);
+            background: radial-gradient(circle, #1e293b 0%, #090d16 100%);
+            position: relative;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            bottom: 50%;
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 14px;
+            background: var(--hazard-red);
+            transform-origin: bottom center;
+            transform: rotate(-45deg);
+            transition: transform 0.25s ease-out;
+        }
+
+        .gauge-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--brass-bright);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .gauge-info {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .gauge-label {
+            font-size: 0.65rem;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        .gauge-value {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--crt-bright);
+            text-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+        }
+
+        .gauge-value.warning {
+            color: var(--hazard-red);
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
+        }
+
+        /* =========================================================
+           MAIN VIEWPORT & SIDE SONAR LAYOUT
+           ========================================================= */
+        .main-workspace {
+            display: grid;
+            grid-template-columns: 1fr 290px;
+            gap: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Viewport Frame (Heavy Pipe & Brass Window) */
+        .viewport-frame {
+            background: #05070b;
+            border: 4px solid #4a5568;
+            border-color: #64748b #2d3748 #1e293b #475569;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 40px rgba(0,0,0,0.95),
+                0 10px 25px rgba(0,0,0,0.7);
+        }
+
+        /* CRT Scanline & Dirty Lens Overlay */
+        .viewport-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                radial-gradient(circle at 50% 50%, transparent 65%, rgba(0, 0, 0, 0.65) 100%);
+            background-size: 100% 4px, 100% 100%;
+            z-index: 6;
+        }
+
+        /* Viewport Top HUD Overlay Bar */
+        .viewport-hud-top {
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            right: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        .hud-chip {
+            background: rgba(9, 13, 22, 0.85);
+            border: 1px solid rgba(217, 155, 56, 0.5);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--btc-bright);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+
+        .hud-controls-tip {
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid #38bdf8;
+            color: #bae6fd;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hud-controls-tip:hover {
+            background: #0284c7;
+            color: #fff;
+        }
+
+        canvas#mineCanvas {
+            width: 100%;
+            height: 490px;
+            display: block;
+            cursor: crosshair;
+        }
+
+        /* Speech Bubble Overlay */
+        .miner-bubble {
+            position: absolute;
+            background: linear-gradient(180deg, #fef08a 0%, #f59e0b 100%);
+            color: #090d16;
+            border: 2px solid #000;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 900;
+            pointer-events: none;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.85);
+            transition: opacity 0.2s, transform 0.2s;
+            opacity: 0;
+            transform: translateY(8px);
+            z-index: 12;
+            white-space: nowrap;
+        }
+
+        .miner-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 18px;
+            border-width: 7px 7px 0;
+            border-style: solid;
+            border-color: #f59e0b transparent;
+            display: block;
+            width: 0;
+        }
+
+        .miner-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           RIGHT SIDEBAR: SONAR RADAR & MINER TELEMETRY
+           ========================================================= */
+        .side-rack {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .rack-module {
+            background: linear-gradient(180deg, #121721 0%, #0b0e15 100%);
+            border: 2px solid #2d3748;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.85);
+            position: relative;
+        }
+
+        .module-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--brass-bright);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 6px;
+        }
+
+        .led-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--crt-green);
+            box-shadow: 0 0 8px var(--crt-green);
+            animation: blinkLed 1.5s infinite;
+        }
+
+        @keyframes blinkLed {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Mini-Map Sonar Canvas */
+        .sonar-box {
+            width: 100%;
+            height: 125px;
+            background: #040806;
+            border: 2px solid #164e35;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.25);
+        }
+
+        canvas#sonarCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Miner Rig Status Bars */
+        .rig-stat-row {
+            margin-bottom: 10px;
+        }
+        .rig-stat-head {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+        .rig-bar-bg {
+            height: 8px;
+            background: #070a0f;
+            border: 1px solid #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .rig-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        /* CRT Telemetry Terminal Log */
+        .crt-terminal {
+            height: 145px;
+            background: #040705;
+            border: 2px solid #1e293b;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #34d399;
+            overflow-y: auto;
+            line-height: 1.5;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+        }
+
+        .crt-line {
+            margin-bottom: 3px;
+            word-break: break-all;
+        }
+        .crt-line.warn { color: #fbbf24; }
+        .crt-line.crit { color: #f87171; font-weight: 800; }
+
+        /* =========================================================
+           INDUSTRIAL PIPE STATUS CONDUIT
+           ========================================================= */
+        .pipe-conduit {
+            margin-top: 16px;
+            background: linear-gradient(180deg, #0b0f17 0%, #161d2a 50%, #0b0f17 100%);
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.8);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .conduit-path {
+            color: var(--cyan-glow);
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.35);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 60%;
+        }
+
+        .conduit-counters {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nixie-box {
+            background: #05070a;
+            border: 1px solid #334155;
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: #94a3b8;
+            font-size: 0.78rem;
+        }
+
+        .nixie-num {
+            color: var(--btc-gold);
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-shadow: 0 0 8px rgba(247, 147, 26, 0.6);
+            margin-left: 4px;
+        }
+
+        /* =========================================================
+           HEAVY TACTILE MECHANICAL BUTTONS (VALVE & SWITCHES)
+           ========================================================= */
+        .control-deck {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 1120px) {
+            .control-deck {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .mech-btn {
+            position: relative;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 0;
+            background: transparent;
+            transition: transform 0.1s;
+            display: flex;
+            height: 100%;
+        }
+
+        .mech-btn-outer {
+            background: #0b0e14;
+            border: 2px solid #2d3748;
+            border-radius: 12px;
+            padding: 4px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.7);
+            width: 100%;
+            display: flex;
+        }
+
+        .mech-btn-face {
+            width: 100%;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-family: 'Pretendard', sans-serif;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.12s ease;
+        }
+
+        .btn-icon {
+            font-size: 1.35rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+        }
+
+        .btn-text-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        .btn-main-title {
+            font-size: 0.94rem;
+            font-weight: 900;
+            letter-spacing: 0.1px;
+        }
+
+        .btn-sub-title {
+            font-size: 0.74rem;
+            font-weight: 700;
+            opacity: 0.88;
+            margin-top: 2px;
+        }
+
+        /* Screw heads on button corners */
+        .mech-btn-face::before,
+        .mech-btn-face::after {
+            content: '•';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.45;
+        }
+        .mech-btn-face::before { left: 8px; }
+        .mech-btn-face::after { right: 8px; }
+
+        /* 1. Red Emergency Jackpot Dome Button */
+        .mech-btn.red-dome .mech-btn-face {
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+            border-top: 2px solid #fca5a5;
+            border-bottom: 5px solid #7f1d1d;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
+        }
+        .mech-btn.red-dome:hover .mech-btn-face {
+            background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+            box-shadow: 0 0 28px rgba(239, 68, 68, 0.75);
+        }
+
+        /* 2. Brass Steam Overclock Button */
+        .mech-btn.brass-valve .mech-btn-face {
+            background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+            border-top: 2px solid #fde68a;
+            border-bottom: 5px solid #78350f;
+            color: #090d16;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.25);
+        }
+        .mech-btn.brass-valve:hover .mech-btn-face {
+            background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+            box-shadow: 0 0 28px rgba(245, 158, 11, 0.65);
+        }
+
+        /* 3. Steel Dynamite / Action Button */
+        .mech-btn.cyan-drill .mech-btn-face {
+            background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+            border-top: 2px solid #7dd3fc;
+            border-bottom: 5px solid #0c4a6e;
+            color: #f0f9ff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+        }
+        .mech-btn.cyan-drill:hover .mech-btn-face {
+            background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+            box-shadow: 0 0 24px rgba(14, 165, 233, 0.6);
+        }
+
+        /* 4. Dark Industrial Steel Telemetry Button */
+        .mech-btn.steel-plate .mech-btn-face {
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            border-top: 2px solid #64748b;
+            border-bottom: 5px solid #0f172a;
+            color: #e2e8f0;
+        }
+        .mech-btn.steel-plate:hover .mech-btn-face {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: var(--brass-bright);
+            color: #fff;
+        }
+
+        /* 5. Emerald Phosphor Spec Manual Button */
+        .mech-btn.emerald-spec .mech-btn-face {
+            background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+            border-top: 2px solid #6ee7b7;
+            border-bottom: 5px solid #064e3b;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.65);
+            box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
+        }
+        .mech-btn.emerald-spec:hover .mech-btn-face {
+            background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+            box-shadow: 0 0 26px rgba(16, 185, 129, 0.7);
+        }
+
+        /* =========================================================
+           TECHNICAL SPEC & MULTI-CHAIN MANUAL MODAL
+           ========================================================= */
+        .spec-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 5, 9, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .spec-modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .spec-modal-box {
+            width: 100%;
+            max-width: 980px;
+            max-height: 88vh;
+            background: linear-gradient(180deg, #161d2a 0%, #0d1119 100%);
+            border: 3px solid var(--brass-bright);
+            border-radius: 16px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 40px rgba(247, 147, 26, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.96);
+            transition: transform 0.25s ease;
+        }
+
+        .spec-modal-backdrop.open .spec-modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .spec-modal-header {
+            background: linear-gradient(90deg, #1e2636 0%, #121722 100%);
+            border-bottom: 2px solid #2d3748;
+            padding: 16px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spec-modal-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.95rem;
+            color: var(--btc-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spec-close-btn {
+            background: #ef4444;
+            color: #fff;
+            border: 2px solid #fca5a5;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .spec-close-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .spec-modal-body {
+            padding: 22px;
+            overflow-y: auto;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .spec-section-title {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--btc-bright);
+            margin: 18px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--btc-gold);
+            padding-left: 10px;
+        }
+        .spec-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+            font-size: 0.84rem;
+            background: #090d14;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2d3748;
+        }
+
+        .spec-table th {
+            background: #1e293b;
+            color: var(--btc-bright);
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 800;
+            border-bottom: 2px solid #334155;
+        }
+
+        .spec-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #1e293b;
+            color: #cbd5e1;
+        }
+
+        .spec-table tr:hover td {
+            background: rgba(247, 147, 26, 0.06);
+        }
+
+        .spec-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .spec-info-card {
+            background: #0b0f18;
+            border: 1px solid #2d3748;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .spec-info-card h4 {
+            color: #38bdf8;
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .spec-info-card ul {
+            padding-left: 18px;
+            color: #94a3b8;
+            font-size: 0.83rem;
+        }
+
+        .spec-info-card li {
+            margin-bottom: 5px;
+        }
+        .spec-info-card li strong {
+            color: #f8fafc;
+        }
+
+        /* Active Press Physics */
+        .mech-btn:active .mech-btn-face {
+            transform: translateY(3px);
+            border-bottom-width: 2px;
+        }
+
+        /* =========================================================
+           EXCAVATED VAULT DOSSIER CARDS (BOTTOM DECK)
+           ========================================================= */
+        .vault-deck {
+            width: 100%;
+            max-width: 1220px;
+            margin-top: 24px;
+            background: linear-gradient(180deg, #141923 0%, #0d1118 100%);
+            border: 3px solid #2d3748;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.85);
+        }
+
+        .vault-deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .vault-deck-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            color: var(--btc-bright);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .treasure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 16px;
+        }
+
+        .treasure-card {
+            background: linear-gradient(135deg, #161f30 0%, #0d131f 100%);
+            border: 2px solid var(--brass-mid);
+            border-radius: 12px;
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(247, 147, 26, 0.1);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .treasure-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--btc-gold);
+            box-shadow: 0 10px 25px rgba(247, 147, 26, 0.25);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .card-type {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fef08a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+
+        .badge-high {
+            background: rgba(247, 147, 26, 0.2);
+            color: var(--btc-bright);
+            border: 1px solid var(--btc-gold);
+        }
+
+        .secret-box {
+            background: #06090f;
+            border: 1px dashed #475569;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #38bdf8;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            word-break: break-all;
+            margin-bottom: 10px;
+        }
+
+        .btn-mini {
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid var(--brass-mid);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 8px;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .btn-mini:hover {
+            background: var(--btc-gold);
+            color: #000;
+            border-color: #fff;
+        }
+
+        .file-loc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            word-break: break-all;
+        }
+
+        /* Jackpot Emergency Modal Banner */
+        .jackpot-banner {
+            position: fixed;
+            top: 24%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: linear-gradient(135deg, #1a1105 0%, #3b1d06 100%);
+            border: 4px solid var(--btc-gold);
+            border-radius: 18px;
+            padding: 28px 45px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 0 100px rgba(247, 147, 26, 0.95), inset 0 0 30px rgba(247, 147, 26, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .jackpot-banner.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .jackpot-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.7rem;
+            color: var(--btc-bright);
+            text-shadow: 0 0 20px var(--btc-gold), 3px 3px 0 #000;
+            margin-bottom: 12px;
+        }
+
+        .jackpot-sub {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* Camera Shake Effect */
+        @keyframes shakeRig {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-6px, 4px); }
+            40% { transform: translate(6px, -5px); }
+            60% { transform: translate(-5px, -3px); }
+            80% { transform: translate(5px, 5px); }
+        }
+        .shake {
+            animation: shakeRig 0.45s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =====================================================
+         MAIN SUBTERRANEAN INDUSTRIAL RIG CONSOLE
+         ===================================================== -->
+    <div id="rigChassis" class="rig-chassis">
+        <div class="rivet tl"></div>
+        <div class="rivet tr"></div>
+        <div class="rivet bl"></div>
+        <div class="rivet br"></div>
+
+        <div class="hazard-trim"></div>
+
+        <!-- TOP CONTROL HEADER -->
+        <header class="header-deck">
+            <div class="brand-plate">
+                <div class="gear-badge">⛏️</div>
+                <div class="brand-titles">
+                    <h1>SATOSHI HUNTER // DEEP RIG</h1>
+                    <div class="brand-subtitle">
+                        <span class="tag-pill">SECTOR 09 : SUB-PIPE LABYRINTH</span>
+                        <span>지하 배관망 & 로컬 하드웨어 금고 탐사기 v2.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Analog Gauges -->
+            <div class="telemetry-cluster">
+                <div class="gauge-pod">
+                    <div class="gauge-dial">
+                        <div id="needleDepth" class="gauge-needle" style="transform: rotate(-25deg);"></div>
+                        <div class="gauge-center"></div>
+                    </div>
+                    <div class="gauge-info">
+                        <div class="gauge-label">지하 심도 (DEPTH)</div>
+                        <div id="valDepth" class="gauge-value">-1,240 m</div>
+                    </div>
+                </div>
+
+                <div class="gauge-pod">
+                    <div class="gauge-dial">
+                        <div id="needlePsi" class="gauge-needle" style="transform: rotate(15deg);"></div>
+                        <div class="gauge-center"></div>
+                    </div>
+                    <div class="gauge-info">
+                        <div class="gauge-label">배관 증기압 (PSI)</div>
+                        <div id="valPsi" class="gauge-value">86.4 PSI</div>
+                    </div>
+                </div>
+
+                <div class="gauge-pod">
+                    <div class="gauge-dial">
+                        <div id="needleGeiger" class="gauge-needle" style="transform: rotate(-60deg);"></div>
+                        <div class="gauge-center"></div>
+                    </div>
+                    <div class="gauge-info">
+                        <div class="gauge-label">크립토 가이거 (RAD)</div>
+                        <div id="valGeiger" class="gauge-value">0.42 mSv</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN WORKSPACE: CAVE VIEWPORT + SIDE SONAR RACK -->
+        <div class="main-workspace">
+            <!-- Left: Dark Cave & Pipe Labyrinth Canvas -->
+            <div class="viewport-frame">
+                <div class="viewport-overlay"></div>
+
+                <div class="viewport-hud-top">
+                    <div class="hud-chip">
+                        <span>🔦</span>
+                        <span id="hudLocationLabel">SECTOR: [APPDATA VAULT]</span>
+                    </div>
+                    <div class="hud-controls-tip" onclick="toggleControlMode()">
+                        🎮 배관 클릭 이동 / WASD 조종 / Space 폭탄
+                    </div>
+                </div>
+
+                <canvas id="mineCanvas" width="900" height="490"></canvas>
+                <div id="minerBubble" class="miner-bubble">지하 배관망 수색 개시! 🔦</div>
+            </div>
+
+            <!-- Right: Sonar Mini-Map & Telemetry Rack -->
+            <aside class="side-rack">
+                <!-- Module 1: Sonar Radar -->
+                <div class="rack-module">
+                    <div class="module-header">
+                        <span>📡 ACOUSTIC PIPE SONAR</span>
+                        <div class="led-dot"></div>
+                    </div>
+                    <div class="sonar-box">
+                        <canvas id="sonarCanvas" width="260" height="125"></canvas>
+                    </div>
+                </div>
+
+                <!-- Module 2: Miner Unit Status -->
+                <div class="rack-module">
+                    <div class="module-header">
+                        <span>🤖 UNIT: TOSHI-MK2</span>
+                        <span id="minerStateBadge" style="color:#fbbf24;">[EXPLORING]</span>
+                    </div>
+                    <div class="rig-stat-row">
+                        <div class="rig-stat-head">
+                            <span>🔦 헤드라이트 배터리</span>
+                            <span id="lampBatteryText">98%</span>
+                        </div>
+                        <div class="rig-bar-bg">
+                            <div id="lampBatteryBar" class="rig-bar-fill" style="width: 98%; background: linear-gradient(90deg, #f59e0b, #fef08a);"></div>
+                        </div>
+                    </div>
+                    <div class="rig-stat-row" style="margin-bottom:0;">
+                        <div class="rig-stat-head">
+                            <span>⛏️ 초합금 드릴 내구도</span>
+                            <span id="drillTorqueText">100%</span>
+                        </div>
+                        <div class="rig-bar-bg">
+                            <div id="drillTorqueBar" class="rig-bar-fill" style="width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3: Live CRT Terminal -->
+                <div class="rack-module" style="flex: 1;">
+                    <div class="module-header">
+                        <span>📟 SUB-SURFACE LOG</span>
+                        <span>9600 BAUD</span>
+                    </div>
+                    <div id="crtTerminal" class="crt-terminal">
+                        <div class="crt-line">&gt; SYSTEM BOOT: ABYSSAL RIG v2.0</div>
+                        <div class="crt-line">&gt; HEADLIGHT OPTICS: ONLINE</div>
+                        <div class="crt-line">&gt; SONAR ARRAY: ACTIVE</div>
+                        <div class="crt-line warn">&gt; WAITING FOR EXCAVATION ORDER...</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- PIPE STATUS CONDUIT -->
+        <div class="pipe-conduit">
+            <div class="conduit-path" id="curPathDisplay">
+                🔧 [PIPE-TELEMETRY] 지하 배관망 대기 중... 아래의 밸브 스위치를 눌러 탐사를 제어하세요.
+            </div>
+            <div class="conduit-counters">
+                <div class="nixie-box">SCANNED <span id="filesScannedCount" class="nixie-num">0</span></div>
+                <div class="nixie-box">VAULTS <span id="totalTreasuresCount" class="nixie-num" style="color:#ef4444;">0</span></div>
+                <div class="nixie-box">TIME <span id="elapsedTime" class="nixie-num">0.0s</span></div>
+            </div>
+        </div>
+
+        <!-- HEAVY MECHANICAL CONTROL BUTTONS -->
+        <div class="control-deck">
+            <button class="mech-btn red-dome" onclick="triggerDemoJackpot()">
+                <div class="mech-btn-outer">
+                    <div class="mech-btn-face">
+                        <span class="btn-icon">🚨</span>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">비상 금고 폭파!</span>
+                            <span class="btn-sub-title">(빵파레 잭팟)</span>
+                        </div>
+                    </div>
+                </div>
+            </button>
+
+            <button class="mech-btn brass-valve" onclick="startSimulatedMining()">
+                <div class="mech-btn-outer">
+                    <div class="mech-btn-face">
+                        <span class="btn-icon">⚙️</span>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">증기 밸브 오버클럭</span>
+                            <span class="btn-sub-title">(초고속 탐사)</span>
+                        </div>
+                    </div>
+                </div>
+            </button>
+
+            <button class="mech-btn cyan-drill" onclick="dropDynamiteEffect()">
+                <div class="mech-btn-outer">
+                    <div class="mech-btn-face">
+                        <span class="btn-icon">🧨</span>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">다이너마이트 발파</span>
+                            <span class="btn-sub-title">(암반 파쇄)</span>
+                        </div>
+                    </div>
+                </div>
+            </button>
+
+            <button class="mech-btn steel-plate" onclick="window.open('satoshi_hunter_report.html')">
+                <div class="mech-btn-outer">
+                    <div class="mech-btn-face">
+                        <span class="btn-icon">📊</span>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">정밀 스캔 리포트</span>
+                            <span class="btn-sub-title">(내 컴퓨터 결과)</span>
+                        </div>
+                    </div>
+                </div>
+            </button>
+
+            <button class="mech-btn emerald-spec" onclick="openSpecModal()">
+                <div class="mech-btn-outer">
+                    <div class="mech-btn-face">
+                        <span class="btn-icon">📘</span>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">탐지 엔진 명세서</span>
+                            <span class="btn-sub-title">(지원 코인·지갑)</span>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- TECHNICAL SPEC & MULTI-CHAIN MANUAL MODAL -->
+    <div id="specModal" class="spec-modal-backdrop" onclick="if(event.target===this) closeSpecModal()">
+        <div class="spec-modal-box">
+            <div class="spec-modal-header">
+                <div class="spec-modal-title">
+                    <span>📘</span>
+                    <span>ABYSSAL RIG // 멀티체인 탐지 엔진 명세서</span>
+                </div>
+                <button class="spec-close-btn" onclick="closeSpecModal()">✕ 닫기 (ESC)</button>
+            </div>
+            <div class="spec-modal-body">
+                <div class="spec-section-title">🪙 1. 지원 코인 및 개인키 수학적 검증 엔진 (오탐지 0% 알고리즘)</div>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>지원 코인 및 지갑 포맷</th>
+                            <th>탐지 및 수학적 체크섬 검증 방식</th>
+                            <th>블록체인 조회 연동</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>시드 구문 (공통)</strong></td>
+                            <td><strong>모든 코인 공용</strong> (BTC, ETH, SOL, DOGE, 메타마스크, 렛저 등)</td>
+                            <td><strong>BIP-39 공식 2,048개 영단어 사전</strong> 12/15/18/21/24단어 교차 검증</td>
+                            <td>모든 지갑 복구 호환</td>
+                        </tr>
+                        <tr>
+                            <td><strong>비트코인 (BTC)</strong></td>
+                            <td>Legacy(<code>1..</code>), P2SH(<code>3..</code>), SegWit(<code>bc1q..</code>), Taproot(<code>bc1p..</code>), WIF 개인키(<code>5/K/L..</code>)</td>
+                            <td>Base58Check 더블 SHA-256 체크섬(<code>0x00</code>, <code>0x05</code>, <code>0x80</code>) &amp; Bech32 폴리모드 검증</td>
+                            <td><strong>Mempool.space</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>HD 마스터키</strong></td>
+                            <td>BIP-32 / 44 / 84 확장 마스터 개인키 (<code>xprv..</code>, <code>yprv..</code>, <code>zprv..</code>, <code>Ltpv..</code>)</td>
+                            <td>111자 Extended Private Key Base58Check 수학적 체크섬 검증</td>
+                            <td>하위 지갑 전체 복구</td>
+                        </tr>
+                        <tr>
+                            <td><strong>이더리움 &amp; EVM</strong></td>
+                            <td><strong>ETH, BNB, Polygon, Arbitrum, Base, ERC-20 토큰</strong> (<code>0x..</code>), <strong>Keystore JSON</strong></td>
+                            <td>EIP-55 체크섬 &amp; <code>UTC--*</code> 파일 및 내부 <code>"ciphertext"/"kdf"</code> 암호화 볼트 탐지</td>
+                            <td><strong>Etherscan.io</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>도지코인 (DOGE)</strong></td>
+                            <td>도지코인 주소(<code>D..</code>) 및 도지 WIF 개인키(<code>6..</code>, <code>Q..</code>)</td>
+                            <td>Base58Check 버전 바이트(<code>0x1E</code> 주소 / <code>0x9E</code> 개인키) 정밀 식별</td>
+                            <td><strong>Blockchair (DOGE)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>라이트코인 (LTC)</strong></td>
+                            <td>라이트코인 주소(<code>L..</code>, <code>M..</code>, <code>ltc1..</code>) 및 WIF 개인키(<code>6..</code>, <code>T..</code>)</td>
+                            <td>Base58Check 버전 바이트(<code>0x30</code>, <code>0x32</code>, <code>0xB0</code>) &amp; <code>ltc1</code> Bech32 검증</td>
+                            <td><strong>Litecoinspace.org</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>트론 / 테더 (TRX)</strong></td>
+                            <td>트론(TRX) 및 <strong>USDT (TRC-20)</strong> 지갑 주소 (<code>T..</code>)</td>
+                            <td>Base58Check 버전 바이트(<code>0x41</code>) 34자 체크섬 검증</td>
+                            <td><strong>Tronscan.org</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>솔라나 (SOL)</strong></td>
+                            <td>Phantom / Solana CLI 64바이트 비밀키 배열 (<code>[174, 47, ...]</code>, <code>id.json</code>, <code>keypair.json</code>)</td>
+                            <td>64바이트(0~255) Ed25519 키페어 JSON 배열 구조 검증</td>
+                            <td>Phantom / Solflare 호환</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="spec-section-title">🦊 2. 웹3 브라우저 확장 지갑 &amp; 데스크톱 지갑 DB 원천 탐지 (총 22종)</div>
+                <div class="spec-grid-2">
+                    <div class="spec-info-card">
+                        <h4>🌐 웹 브라우저 확장 볼트 (Chrome / Edge / Brave / Whale)</h4>
+                        <ul>
+                            <li><strong>MetaMask (메타마스크)</strong>: <code>nkbihfbe...</code> LevelDB 암호화 볼트</li>
+                            <li><strong>Phantom (팬텀 - 솔라나)</strong>: <code>bfnaelmo...</code> 솔라나 키링 볼트</li>
+                            <li><strong>Rabby Wallet (래비)</strong>: <code>acmacodk...</code> EVM 멀티체인 볼트</li>
+                            <li><strong>Trust / Coinbase / OKX Wallet</strong>: 브라우저 로컬 확장 스토리지</li>
+                            <li><strong>Keplr (코스모스) / TronLink (트론) / Kaikas (카이아) / Binance</strong></li>
+                        </ul>
+                    </div>
+                    <div class="spec-info-card">
+                        <h4>💻 데스크톱 &amp; 하드웨어 지갑 애플리케이션 DB</h4>
+                        <ul>
+                            <li><strong>Bitcoin / Dogecoin / Litecoin Core</strong>: <code>wallet.dat</code> 및 파일명이 변경된 DB도 내부 <strong>Berkeley DB 매직 바이트(<code>0x00053162</code>)</strong>로 완벽 추적</li>
+                            <li><strong>Electrum (BTC / LTC) &amp; Sparrow Wallet</strong>: 기본 지갑 및 <code>.mv.db</code></li>
+                            <li><strong>Exodus &amp; Atomic &amp; Coinomi</strong>: <code>seed.seco</code>, <code>secrethash.dat</code></li>
+                            <li><strong>Monero GUI (XMR) &amp; KeePass</strong>: <code>.keys</code>, <code>.wallet</code>, <code>.kdbx</code></li>
+                            <li><strong>Ledger Live &amp; Trezor Suite</strong>: 하드웨어 지갑 연동 로컬 계정 DB</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="spec-section-title">🔒 3. 찾은 건 내 PC 밖으로 안 나가요</div>
+                <div class="spec-info-card">
+                    <ul>
+                        <li><strong>밖으로 보내는 코드 없음</strong>: 파일 탐색과 체크섬 검증은 모두 내 컴퓨터 안에서만 합니다. 인터넷에 닿는 건 화면 글꼴과, 내가 [잔액 조회]를 누를 때 여는 공개 블록 탐색기(주소만 전달)뿐입니다.</li>
+                        <li><strong>이 광부 화면은 연출(데모)입니다</strong>: 실제 검사는 run_hunter.bat 의 검은 창에서 하고, 결과는 리포트로 열립니다.</li>
+                        <li><strong>자동 마스킹(Masking) 보호</strong>: 발굴된 시드 구문과 개인키는 화면 캡처나 어깨너머 노출을 막기 위해 기본적으로 마스킹(<code>***</code>) 처리되며, 사용자가 직접 <code>[👁️ 해독하기]</code>를 누를 때만 표시됩니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JACKPOT EMERGENCY POPUP -->
+    <div id="jackpotBanner" class="jackpot-banner">
+        <div class="jackpot-title">🚨 VAULT BREACHED!! 🚨</div>
+        <div class="jackpot-sub">심해 지하 배관 금고에서 잠자던 비트코인 자산을 발굴했습니다!! 🪙🎉</div>
+    </div>
+
+    <!-- EXCAVATED VAULT DOSSIER CARDS -->
+    <section class="vault-deck">
+        <div class="vault-deck-header">
+            <div class="vault-deck-title">
+                <span>🧰</span>
+                <span>EXCAVATED CRYPTO VAULTS (<span id="findingsHeaderCount">0</span>)</span>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#64748b;">
+                SECURITY LEVEL: LOCAL AIR-GAPPED
+            </div>
+        </div>
+
+        <div id="findingsContainer" class="treasure-grid">
+            <div style="grid-column: 1 / -1; text-align: center; padding: 35px; color: #64748b; background: #090d14; border-radius: 12px; border: 1px dashed #1e293b; font-family: 'JetBrains Mono', monospace;">
+                [NO VAULT BREACHED YET] — 상단의 [🚨 비상 금고 폭파!] 또는 [⚙️ 증기 밸브 오버클럭] 스위치로 보물을 발굴하세요!
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         GAME ENGINE & SUBTERRANEAN GRAPHICS SCRIPT
+         ===================================================== -->
+    <script>
+        const canvas = document.getElementById('mineCanvas');
+        const ctx = canvas.getContext('2d');
+        const sonarCanvas = document.getElementById('sonarCanvas');
+        const sonarCtx = sonarCanvas.getContext('2d');
+        const bubble = document.getElementById('minerBubble');
+        const crtTerminal = document.getElementById('crtTerminal');
+
+        // ==========================================
+        // 1. SYNTHESIZED SOUND ENGINE (Web Audio API)
+        // ==========================================
+        let audioCtx = null;
+        function ensureAudio() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+            } catch(e) {}
+        }
+
+        function playClinkSound() {
+            try {
+                ensureAudio();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(1300 + Math.random() * 500, now);
+                osc.frequency.exponentialRampToValueAtTime(400, now + 0.06);
+                gain.gain.setValueAtTime(0.04, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.06);
+            } catch(e) {}
+        }
+
+        function playExplosionSound() {
+            try {
+                ensureAudio();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.exponentialRampToValueAtTime(28, now + 0.45);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.45);
+            } catch(e) {}
+        }
+
+        function playFanfare() {
+            try {
+                ensureAudio();
+                const now = audioCtx.currentTime;
+                const notes = [
+                    { f: 523.25, d: 0.13, t: 0.0 },
+                    { f: 523.25, d: 0.13, t: 0.15 },
+                    { f: 523.25, d: 0.13, t: 0.30 },
+                    { f: 659.25, d: 0.40, t: 0.45 },
+                    { f: 587.33, d: 0.18, t: 0.88 },
+                    { f: 659.25, d: 0.18, t: 1.08 },
+                    { f: 783.99, d: 0.25, t: 1.28 },
+                    { f: 1046.50, d: 0.85, t: 1.55 }
+                ];
+                notes.forEach(n => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(n.f, now + n.t);
+                    gain.gain.setValueAtTime(0, now + n.t);
+                    gain.gain.linearRampToValueAtTime(0.28, now + n.t + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now + n.t);
+                    osc.stop(now + n.t + n.d);
+                });
+            } catch(e) {}
+        }
+
+        function logCRT(msg, level = '') {
+            const div = document.createElement('div');
+            div.className = 'crt-line ' + level;
+            const time = new Date().toTimeString().split(' ')[0];
+            div.innerText = `[${time}] > ${msg}`;
+            crtTerminal.appendChild(div);
+            while (crtTerminal.children.length > 25) {
+                crtTerminal.removeChild(crtTerminal.firstChild);
+            }
+            crtTerminal.scrollTop = crtTerminal.scrollHeight;
+        }
+
+        // ==========================================
+        // 2. SUBTERRANEAN LABYRINTH & PIPE GRID
+        // ==========================================
+        // 18 cols x 10 rows (50x49 px each = 900x490)
+        const COLS = 18;
+        const ROWS = 10;
+        const CW = 50;
+        const CH = 49;
+
+        // 0: Deep Rock, 1: Pipe Tunnel, 2: Ladder Shaft, 3: Golden Vault Chamber, 4: Crystal Vein Rock
+        const MAZE = [
+            [0,0,4,0,0,0,0,4,0,0,0,0,0,4,0,0,0,0],
+            [0,3,1,1,1,2,0,3,1,1,1,2,0,1,1,1,3,0],
+            [0,0,0,4,0,2,0,0,0,4,0,2,0,2,0,0,0,0],
+            [0,1,1,1,1,1,1,1,1,0,0,1,1,2,1,1,1,0],
+            [0,2,0,0,4,0,0,0,2,0,4,0,0,2,0,0,2,0],
+            [0,2,1,1,3,0,1,1,1,1,1,2,0,1,1,1,2,0],
+            [0,2,0,0,0,4,2,0,0,4,0,2,0,0,4,0,2,0],
+            [0,1,1,1,1,1,1,0,0,3,1,1,1,1,1,1,2,0],
+            [0,4,0,0,2,0,0,0,0,0,0,4,0,0,2,0,3,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        ];
+
+        const WAYPOINTS = [
+            { col: 1, row: 1, name: "APPDATA VAULT" },
+            { col: 5, row: 1 },
+            { col: 5, row: 3 },
+            { col: 1, row: 3 },
+            { col: 1, row: 7, name: "SYSTEM32 PIPES" },
+            { col: 6, row: 7 },
+            { col: 6, row: 5 },
+            { col: 4, row: 5, name: "KEYSTORE CHAMBER" },
+            { col: 8, row: 5 },
+            { col: 8, row: 3 },
+            { col: 7, row: 1, name: "DESKTOP SECTOR" },
+            { col: 11, row: 1 },
+            { col: 11, row: 5 },
+            { col: 9, row: 7, name: "DOCUMENTS ARCHIVE" },
+            { col: 13, row: 7 },
+            { col: 13, row: 3 },
+            { col: 13, row: 1 },
+            { col: 16, row: 1, name: "DOWNLOADS BUNKER" },
+            { col: 16, row: 3 },
+            { col: 16, row: 8, name: "COLD STORAGE CORE" },
+            { col: 16, row: 5 },
+            { col: 13, row: 5 }
+        ];
+
+        // Steam Jets in pipes
+        const steamValves = [
+            { x: 3 * CW + 25, y: 1 * CH + 12, timer: 0, period: 140 },
+            { x: 7 * CW + 25, y: 3 * CH + 12, timer: 50, period: 180 },
+            { x: 11 * CW + 25, y: 7 * CH + 12, timer: 90, period: 160 },
+            { x: 15 * CW + 25, y: 5 * CH + 12, timer: 20, period: 150 }
+        ];
+
+        // Water Drops in tunnels
+        let waterDrops = [];
+        let steamParticles = [];
+        let rockSparks = [];
+        let confetti = [];
+        let goldCoins = [];
+        let dustMotes = [];
+        let fullLightOn = false;
+        let sonarAngle = 0;
+
+        for (let i = 0; i < 45; i++) {
+            dustMotes.push({
+                x: Math.random() * 900,
+                y: Math.random() * 490,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 2 + 0.7,
+                alpha: Math.random() * 0.6 + 0.2
+            });
+        }
+
+        // Miner Unit
+        const miner = {
+            x: 1 * CW + CW / 2,
+            y: 1 * CH + CH / 2,
+            targetNodeIdx: 1,
+            customTarget: null,
+            angle: 0,
+            speed: 2.3,
+            state: 'exploring', // exploring, mining, resting, celebrate
+            frame: 0,
+            stateTimer: 0,
+            onLadder: false
+        };
+
+        // Direct User Click on Canvas to send miner!
+        canvas.addEventListener('mousedown', (e) => {
+            ensureAudio();
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const clickX = (e.clientX - rect.left) * scaleX;
+            const clickY = (e.clientY - rect.top) * scaleY;
+
+            // Find nearest valid tunnel cell
+            let bestDist = 999999;
+            let bestCell = null;
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    if (MAZE[r][c] !== 0 && MAZE[r][c] !== 4) {
+                        const cx = c * CW + CW / 2;
+                        const cy = r * CH + CH / 2;
+                        const d = Math.hypot(clickX - cx, clickY - cy);
+                        if (d < bestDist) {
+                            bestDist = d;
+                            bestCell = { x: cx, y: cy, col: c, row: r };
+                        }
+                    }
+                }
+            }
+            if (bestCell) {
+                miner.customTarget = bestCell;
+                miner.state = 'exploring';
+                showBubble(`🎯 목표 지점 [${bestCell.col}, ${bestCell.row}] 이동 & 채굴!`, 2000);
+                logCRT(`MANUAL_NAV: Moving to Grid (${bestCell.col},${bestCell.row})`);
+                // Spawn target ping ring
+                for (let i = 0; i < 10; i++) {
+                    rockSparks.push({
+                        x: bestCell.x,
+                        y: bestCell.y,
+                        vx: Math.cos(i * 0.628) * 2.5,
+                        vy: Math.sin(i * 0.628) * 2.5,
+                        life: 1.0,
+                        color: '#00f2fe'
+                    });
+                }
+            }
+        });
+
+        // Keyboard WASD / Arrow Keys Control
+        const keys = {};
+        window.addEventListener('keydown', (e) => {
+            keys[e.key.toLowerCase()] = true;
+            if (e.key === ' ') {
+                e.preventDefault();
+                dropDynamiteEffect();
+            }
+        });
+        window.addEventListener('keyup', (e) => {
+            keys[e.key.toLowerCase()] = false;
+        });
+
+        function toggleControlMode() {
+            showBubble("💡 화면의 원하는 배관을 클릭하거나 스페이스바(폭탄)를 눌러보세요!", 3500);
+        }
+
+        // Speech Bubble
+        let bubbleTimeout = null;
+        function showBubble(text, duration = 2400) {
+            bubble.innerText = text;
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = rect.width / canvas.width;
+            const scaleY = rect.height / canvas.height;
+            bubble.style.left = Math.max(12, Math.min(rect.width - 210, miner.x * scaleX - 45)) + 'px';
+            bubble.style.top = Math.max(12, (miner.y * scaleY - 54)) + 'px';
+            bubble.classList.add('show');
+
+            if (bubbleTimeout) clearTimeout(bubbleTimeout);
+            bubbleTimeout = setTimeout(() => {
+                bubble.classList.remove('show');
+            }, duration);
+        }
+
+        const MINE_PHRASES = [
+            "깡! 깡! 배관 뒤쪽 금고 타격 중! ⛏️",
+            "초합금 드릴 풀가동!! 불꽃 튄다!",
+            "어디 숨었냐 사토시의 비밀키!",
+            "암반 파쇄 중... 가이거 수치 상승!"
+        ];
+        const REST_PHRASES = [
+            "휴우~ 지하 증기가 뜨겁구만 💦",
+            "헤드라이트 렌즈 먼지 좀 닦고... 🔦",
+            "잠깐 냉각수 한 모금 마시자 ☕",
+            "소나 레이더에 뭔가 잡혔는데?!"
+        ];
+
+        // ==========================================
+        // 3. UPDATE WORLD & MINER STATE MACHINE
+        // ==========================================
+        function updateWorld() {
+            miner.frame++;
+            miner.stateTimer++;
+            sonarAngle = (sonarAngle + 0.04) % (Math.PI * 2);
+
+            // Check if miner is on a ladder tile
+            const curCol = Math.floor(miner.x / CW);
+            const curRow = Math.floor(miner.y / CH);
+            miner.onLadder = (MAZE[curRow] && MAZE[curRow][curCol] === 2);
+
+            // Update Analog Gauges based on Miner Y Depth & Proximity to Vaults
+            const depthMeters = Math.floor(1100 + (miner.y / 490) * 850);
+            document.getElementById('valDepth').innerText = `-${depthMeters.toLocaleString()} m`;
+            document.getElementById('needleDepth').style.transform = `rotate(${-50 + (miner.y / 490) * 100}deg)`;
+
+            // Steam PSI fluctuation
+            if (miner.frame % 30 === 0) {
+                const psi = (82 + Math.sin(miner.frame * 0.05) * 8).toFixed(1);
+                document.getElementById('valPsi').innerText = `${psi} PSI`;
+                document.getElementById('needlePsi').style.transform = `rotate(${-20 + Math.sin(miner.frame * 0.05) * 35}deg)`;
+            }
+
+            // Geiger Counter proximity to nearest type-3 Vault Chamber
+            let minVaultDist = 999;
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    if (MAZE[r][c] === 3) {
+                        const vx = c * CW + CW / 2;
+                        const vy = r * CH + CH / 2;
+                        const d = Math.hypot(miner.x - vx, miner.y - vy);
+                        if (d < minVaultDist) minVaultDist = d;
+                    }
+                }
+            }
+            const radVal = Math.max(0.15, (180 / (minVaultDist + 20))).toFixed(2);
+            const geigerEl = document.getElementById('valGeiger');
+            geigerEl.innerText = `${radVal} mSv`;
+            if (radVal > 2.2) {
+                geigerEl.classList.add('warning');
+            } else {
+                geigerEl.classList.remove('warning');
+            }
+            const geigerAngle = Math.min(65, -65 + (radVal / 4.5) * 130);
+            document.getElementById('needleGeiger').style.transform = `rotate(${geigerAngle}deg)`;
+
+            // Update Badge
+            document.getElementById('minerStateBadge').innerText = `[${miner.state.toUpperCase()}]`;
+
+            // Steam Jets update
+            steamValves.forEach(v => {
+                v.timer++;
+                if (v.timer % v.period < 28) {
+                    steamParticles.push({
+                        x: v.x,
+                        y: v.y,
+                        vx: (Math.random() - 0.5) * 1.2,
+                        vy: Math.random() * 1.8 + 0.8,
+                        size: Math.random() * 6 + 3,
+                        life: 1.0
+                    });
+                }
+            });
+
+            for (let i = steamParticles.length - 1; i >= 0; i--) {
+                const p = steamParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.size += 0.15;
+                p.life -= 0.035;
+                if (p.life <= 0) steamParticles.splice(i, 1);
+            }
+
+            // Ambient Water Drops
+            if (Math.random() < 0.08) {
+                const randW = WAYPOINTS[Math.floor(Math.random() * WAYPOINTS.length)];
+                waterDrops.push({
+                    x: randW.col * CW + 15 + Math.random() * 20,
+                    y: randW.row * CH + 8,
+                    floorY: randW.row * CH + CH - 6,
+                    vy: 1.5,
+                    splash: 0
+                });
+            }
+            for (let i = waterDrops.length - 1; i >= 0; i--) {
+                const w = waterDrops[i];
+                if (w.splash > 0) {
+                    w.splash += 0.8;
+                    if (w.splash > 8) waterDrops.splice(i, 1);
+                } else {
+                    w.y += w.vy;
+                    w.vy += 0.15;
+                    if (w.y >= w.floorY) {
+                        w.y = w.floorY;
+                        w.splash = 1;
+                    }
+                }
+            }
+
+            // Dust Motes
+            dustMotes.forEach(d => {
+                d.x += d.vx;
+                d.y += d.vy;
+                if (d.x < 0) d.x = 900;
+                if (d.x > 900) d.x = 0;
+                if (d.y < 0) d.y = 490;
+                if (d.y > 490) d.y = 0;
+            });
+
+            if (miner.state === 'celebrate') return;
+
+            // Check Manual Keyboard Movement override
+            let manualDx = 0, manualDy = 0;
+            if (keys['arrowleft'] || keys['a']) manualDx = -1;
+            if (keys['arrowright'] || keys['d']) manualDx = 1;
+            if (keys['arrowup'] || keys['w']) manualDy = -1;
+            if (keys['arrowdown'] || keys['s']) manualDy = 1;
+
+            if (manualDx !== 0 || manualDy !== 0) {
+                const nextX = miner.x + manualDx * 3.0;
+                const nextY = miner.y + manualDy * 3.0;
+                const nc = Math.floor(nextX / CW);
+                const nr = Math.floor(nextY / CH);
+                if (MAZE[nr] && MAZE[nr][nc] !== 0 && MAZE[nr][nc] !== 4) {
+                    miner.x = nextX;
+                    miner.y = nextY;
+                    miner.angle = Math.atan2(manualDy, manualDx);
+                    miner.customTarget = null;
+                    return;
+                }
+            }
+
+            // Autonomous or Click-Guided Navigation
+            if (miner.state === 'exploring') {
+                const target = miner.customTarget || {
+                    x: WAYPOINTS[miner.targetNodeIdx].col * CW + CW / 2,
+                    y: WAYPOINTS[miner.targetNodeIdx].row * CH + CH / 2,
+                    name: WAYPOINTS[miner.targetNodeIdx].name
+                };
+
+                const dx = target.x - miner.x;
+                const dy = target.y - miner.y;
+                const dist = Math.hypot(dx, dy);
+
+                if (dist > miner.speed) {
+                    miner.x += (dx / dist) * miner.speed;
+                    miner.y += (dy / dist) * miner.speed;
+                    miner.angle = Math.atan2(dy, dx);
+                } else {
+                    miner.x = target.x;
+                    miner.y = target.y;
+
+                    if (miner.customTarget) {
+                        miner.customTarget = null;
+                        miner.state = 'mining';
+                        miner.stateTimer = 0;
+                        showBubble("목표 지점 도착! 정밀 굴착 시작! ⛏️", 2000);
+                    } else {
+                        if (target.name) {
+                            document.getElementById('hudLocationLabel').innerText = `SECTOR: [${target.name}]`;
+                            logCRT(`SCANNING SECTOR: [${target.name}]`);
+                            miner.state = Math.random() < 0.68 ? 'mining' : 'resting';
+                            miner.stateTimer = 0;
+                            if (miner.state === 'mining') {
+                                showBubble(MINE_PHRASES[Math.floor(Math.random() * MINE_PHRASES.length)], 2000);
+                            } else {
+                                showBubble(REST_PHRASES[Math.floor(Math.random() * REST_PHRASES.length)], 2200);
+                            }
+                        }
+                        miner.targetNodeIdx = (miner.targetNodeIdx + 1) % WAYPOINTS.length;
+                    }
+                }
+            } else if (miner.state === 'mining') {
+                if (miner.stateTimer % 14 === 0) {
+                    playClinkSound();
+                    const sx = miner.x + Math.cos(miner.angle) * 22;
+                    const sy = miner.y + Math.sin(miner.angle) * 22;
+                    for (let i = 0; i < 7; i++) {
+                        rockSparks.push({
+                            x: sx,
+                            y: sy,
+                            vx: (Math.random() - 0.5) * 6 + Math.cos(miner.angle) * 2.5,
+                            vy: (Math.random() - 0.5) * 6 - 1.5,
+                            life: 1.0,
+                            color: Math.random() > 0.3 ? '#ffd166' : '#f7931a'
+                        });
+                    }
+                }
+                if (miner.stateTimer > 85) {
+                    miner.state = 'exploring';
+                    miner.stateTimer = 0;
+                }
+            } else if (miner.state === 'resting') {
+                if (miner.stateTimer > 70) {
+                    miner.state = 'exploring';
+                    miner.stateTimer = 0;
+                }
+            }
+        }
+
+        // ==========================================
+        // 4. RENDER SUBTERRANEAN LABYRINTH & PIPES
+        // ==========================================
+        function drawMazeWorld() {
+            ctx.fillStyle = '#070a10';
+            ctx.fillRect(0, 0, 900, 490);
+
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    const type = MAZE[r][c];
+                    const px = c * CW;
+                    const py = r * CH;
+
+                    if (type === 0 || type === 4) {
+                        // Deep Earth & Rugged Rock Strata
+                        ctx.fillStyle = '#0d131d';
+                        ctx.fillRect(px, py, CW, CH);
+
+                        // Beveled rock block texture
+                        ctx.fillStyle = '#131b29';
+                        ctx.fillRect(px + 3, py + 3, CW - 6, CH - 6);
+                        ctx.strokeStyle = '#080b11';
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(px + 1, py + 1, CW - 2, CH - 2);
+
+                        // Rock cracks & pebbles
+                        if ((r * 7 + c * 3) % 2 === 0) {
+                            ctx.fillStyle = '#1e293b';
+                            ctx.fillRect(px + 10, py + 12, 8, 5);
+                            ctx.fillRect(px + 28, py + 30, 10, 6);
+                        }
+
+                        // Glowing Crystal / Gold Veins embedded in rock (type 4)
+                        if (type === 4) {
+                            const pulse = 0.5 + Math.sin(miner.frame * 0.06 + r + c) * 0.3;
+                            ctx.fillStyle = `rgba(0, 242, 254, ${pulse * 0.35})`;
+                            ctx.beginPath();
+                            ctx.arc(px + 25, py + 24, 14, 0, Math.PI * 2);
+                            ctx.fill();
+
+                            ctx.fillStyle = '#00f2fe';
+                            ctx.beginPath();
+                            ctx.moveTo(px + 20, py + 30);
+                            ctx.lineTo(px + 25, py + 14);
+                            ctx.lineTo(px + 31, py + 28);
+                            ctx.closePath();
+                            ctx.fill();
+                        }
+                    } else if (type === 1) {
+                        // Industrial Pipe Corridor
+                        ctx.fillStyle = '#18202c';
+                        ctx.fillRect(px, py, CW, CH);
+
+                        // Brick/Riveted Background Wall
+                        ctx.strokeStyle = '#1f2937';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(px, py + 14, CW / 2, 16);
+                        ctx.strokeRect(px + CW / 2, py + 14, CW / 2, 16);
+
+                        // Heavy Copper & Brass Overhead Pipeline
+                        ctx.fillStyle = '#7c2d12';
+                        ctx.fillRect(px, py + 4, CW, 8);
+                        ctx.fillStyle = '#c2410c';
+                        ctx.fillRect(px, py + 5, CW, 4);
+                        // Pipe Flange Joint
+                        ctx.fillStyle = '#9a3412';
+                        ctx.fillRect(px + 22, py + 2, 6, 12);
+
+                        // Minecart Rail Tracks on Floor
+                        ctx.fillStyle = '#475569';
+                        ctx.fillRect(px, py + CH - 8, CW, 3);
+                        ctx.fillRect(px, py + CH - 4, CW, 2);
+                        for (let t = 4; t < CW; t += 12) {
+                            ctx.fillStyle = '#78350f';
+                            ctx.fillRect(px + t, py + CH - 9, 5, 8);
+                        }
+                    } else if (type === 2) {
+                        // Vertical Steel Shaft & Ladder
+                        ctx.fillStyle = '#141c28';
+                        ctx.fillRect(px, py, CW, CH);
+
+                        // Vertical background pipes
+                        ctx.fillStyle = '#1e293b';
+                        ctx.fillRect(px + 5, py, 6, CH);
+                        ctx.fillStyle = '#334155';
+                        ctx.fillRect(px + CW - 11, py, 6, CH);
+
+                        // Iron/Brass Ladder
+                        ctx.fillStyle = '#d97706';
+                        ctx.fillRect(px + 15, py, 4, CH);
+                        ctx.fillRect(px + 31, py, 4, CH);
+                        ctx.fillStyle = '#fbbf24';
+                        for (let ld = 6; ld < CH; ld += 11) {
+                            ctx.fillRect(px + 15, py + ld, 20, 3);
+                        }
+                    } else if (type === 3) {
+                        // Golden Bitcoin Vault Chamber
+                        ctx.fillStyle = '#1c1917';
+                        ctx.fillRect(px, py, CW, CH);
+
+                        // Hazard Vault Door Frame
+                        ctx.strokeStyle = '#f59e0b';
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(px + 3, py + 3, CW - 6, CH - 6);
+
+                        // Vault Safe Chest & Glowing Bitcoin Core
+                        const glow = 14 + Math.sin(miner.frame * 0.08) * 4;
+                        const grad = ctx.createRadialGradient(px + 25, py + 26, 2, px + 25, py + 26, glow);
+                        grad.addColorStop(0, 'rgba(247, 147, 26, 0.75)');
+                        grad.addColorStop(1, 'rgba(247, 147, 26, 0)');
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.arc(px + 25, py + 26, glow, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Safe Box
+                        ctx.fillStyle = '#78350f';
+                        ctx.fillRect(px + 13, py + 16, 24, 20);
+                        ctx.strokeStyle = '#fbbf24';
+                        ctx.strokeRect(px + 13, py + 16, 24, 20);
+
+                        ctx.fillStyle = '#ffd166';
+                        ctx.font = 'bold 14px JetBrains Mono, monospace';
+                        ctx.fillText('₿', px + 20, py + 31);
+                    }
+                }
+            }
+
+            // Draw Steam Jets
+            steamParticles.forEach(p => {
+                ctx.fillStyle = `rgba(226, 232, 240, ${p.life * 0.35})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw Water Drops & Puddle Ripples
+            waterDrops.forEach(w => {
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.75)';
+                if (w.splash > 0) {
+                    ctx.beginPath();
+                    ctx.ellipse(w.x, w.floorY, w.splash * 1.5, w.splash * 0.5, 0, 0, Math.PI * 2);
+                    ctx.stroke();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(w.x, w.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+
+            // Draw Excavation Sparks
+            for (let i = rockSparks.length - 1; i >= 0; i--) {
+                const s = rockSparks[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                s.vy += 0.18; // gravity
+                s.life -= 0.035;
+                if (s.life <= 0) {
+                    rockSparks.splice(i, 1);
+                    continue;
+                }
+                ctx.fillStyle = s.color;
+                ctx.globalAlpha = s.life;
+                ctx.fillRect(s.x, s.y, 3.5, 3.5);
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        // ==========================================
+        // 5. DRAW MINER UNIT (TOSHI-MK2 RIG)
+        // ==========================================
+        function drawMinerUnit(ctx, x, y, state, frame, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            const isFacingLeft = Math.cos(angle) < -0.1;
+            if (isFacingLeft) {
+                ctx.scale(-1, 1);
+            }
+
+            // Steam Backpack Unit
+            ctx.fillStyle = '#9a3412';
+            ctx.fillRect(-13, -10, 6, 16);
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(-13, -10, 6, 16);
+            // Exhaust chimney
+            ctx.fillStyle = '#475569';
+            ctx.fillRect(-12, -16, 3, 6);
+
+            // Suit Torso
+            ctx.fillStyle = '#b91c1c';
+            ctx.fillRect(-7, -10, 15, 16);
+            // Heavy Overalls & Brass Belt
+            ctx.fillStyle = '#1e3a8a';
+            ctx.fillRect(-7, -2, 15, 11);
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillRect(-7, -2, 15, 3);
+
+            // Animated Legs (Walking or Climbing Ladder)
+            const walkCycle = (state === 'exploring') ? Math.sin(frame * 0.38) * 5 : 0;
+            ctx.fillStyle = '#172554';
+            ctx.fillRect(-6 + walkCycle, 9, 5, 10);
+            ctx.fillRect(2 - walkCycle, 9, 5, 10);
+
+            // Steel-Toe Boots
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(-7 + walkCycle, 17, 7, 4);
+            ctx.fillRect(1 - walkCycle, 17, 7, 4);
+
+            // Head & Visor
+            ctx.fillStyle = '#fed7aa';
+            ctx.fillRect(-6, -22, 13, 12);
+            // Beard
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(-5, -15, 12, 7);
+            // Glowing Goggles
+            ctx.fillStyle = '#00f2fe';
+            ctx.fillRect(1, -20, 6, 4);
+
+            // Brass Mining Helmet
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.arc(0, -22, 10, Math.PI, 0, false);
+            ctx.fill();
+            ctx.fillRect(-11, -22, 22, 3);
+
+            // High-Power Halogen Headlamp
+            ctx.fillStyle = '#fef08a';
+            ctx.fillRect(7, -26, 6, 6);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(9, -25, 3, 4);
+
+            // Action Arms & Pickaxe / Drill
+            if (state === 'mining') {
+                const swing = Math.sin(frame * 0.45);
+                ctx.save();
+                ctx.translate(4, -5);
+                ctx.rotate(swing > 0 ? -1.05 : 0.75);
+                // Arm
+                ctx.fillStyle = '#dc2626';
+                ctx.fillRect(0, -2, 12, 5);
+                // Pickaxe Shaft
+                ctx.fillStyle = '#92400e';
+                ctx.fillRect(10, -16, 4, 32);
+                // Glowing Golden Pickaxe Head
+                ctx.fillStyle = '#fbbf24';
+                ctx.beginPath();
+                ctx.moveTo(6, -16);
+                ctx.lineTo(18, -16);
+                ctx.lineTo(23, -22);
+                ctx.lineTo(1, -22);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            } else if (state === 'resting') {
+                ctx.fillStyle = '#dc2626';
+                ctx.fillRect(2, -16, 9, 4);
+                ctx.fillStyle = '#f8fafc';
+                ctx.fillRect(9, -19, 5, 9);
+            } else if (state === 'celebrate') {
+                const bounce = Math.sin(frame * 0.45) * 5;
+                ctx.translate(0, bounce);
+                ctx.fillStyle = '#dc2626';
+                ctx.fillRect(-13, -18, 5, 13);
+                ctx.fillRect(8, -18, 5, 13);
+                ctx.font = '15px sans-serif';
+                ctx.fillText('✨🪙✨', -16, -32);
+            } else {
+                // Carrying Pickaxe & Lantern
+                ctx.fillStyle = '#dc2626';
+                ctx.fillRect(2, -4, 9, 4);
+                ctx.fillStyle = '#92400e';
+                ctx.fillRect(9, -11, 3, 22);
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillRect(6, -13, 9, 4);
+            }
+
+            ctx.restore();
+        }
+
+        // ==========================================
+        // 6. DYNAMIC FOG-OF-WAR & HEADLIGHT CONE
+        // ==========================================
+        const offDarkCanvas = document.createElement('canvas');
+        offDarkCanvas.width = 900;
+        offDarkCanvas.height = 490;
+        const darkCtx = offDarkCanvas.getContext('2d');
+
+        function drawDarknessAndHeadlight() {
+            if (fullLightOn) return;
+
+            darkCtx.clearRect(0, 0, 900, 490);
+            darkCtx.globalCompositeOperation = 'source-over';
+            darkCtx.fillStyle = 'rgba(4, 6, 11, 0.96)';
+            darkCtx.fillRect(0, 0, 900, 490);
+
+            // Carve out light areas
+            darkCtx.globalCompositeOperation = 'destination-out';
+
+            // 1. Subtle dim glow around all Vault Chambers so they tease the player in the dark!
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    if (MAZE[r][c] === 3) {
+                        const vx = c * CW + 25;
+                        const vy = r * CH + 25;
+                        const vGrad = darkCtx.createRadialGradient(vx, vy, 2, vx, vy, 38);
+                        vGrad.addColorStop(0, 'rgba(0,0,0,0.45)');
+                        vGrad.addColorStop(1, 'rgba(0,0,0,0)');
+                        darkCtx.fillStyle = vGrad;
+                        darkCtx.beginPath();
+                        darkCtx.arc(vx, vy, 38, 0, Math.PI * 2);
+                        darkCtx.fill();
+                    }
+                }
+            }
+
+            // 2. 360-degree Personal Lantern Aura around Miner
+            const lanternGrad = darkCtx.createRadialGradient(miner.x, miner.y, 8, miner.x, miner.y, 95);
+            lanternGrad.addColorStop(0, 'rgba(0,0,0,1.0)');
+            lanternGrad.addColorStop(0.55, 'rgba(0,0,0,0.85)');
+            lanternGrad.addColorStop(1, 'rgba(0,0,0,0.0)');
+            darkCtx.fillStyle = lanternGrad;
+            darkCtx.beginPath();
+            darkCtx.arc(miner.x, miner.y, 95, 0, Math.PI * 2);
+            darkCtx.fill();
+
+            // 3. Directional Headlight Cone Beam
+            const beamDist = 265;
+            const spread = 0.58;
+            const startAngle = miner.angle - spread;
+            const endAngle = miner.angle + spread;
+
+            const coneGrad = darkCtx.createRadialGradient(miner.x, miner.y - 18, 10, miner.x, miner.y - 18, beamDist);
+            coneGrad.addColorStop(0, 'rgba(0,0,0,1.0)');
+            coneGrad.addColorStop(0.72, 'rgba(0,0,0,0.92)');
+            coneGrad.addColorStop(1, 'rgba(0,0,0,0.0)');
+
+            darkCtx.fillStyle = coneGrad;
+            darkCtx.beginPath();
+            darkCtx.moveTo(miner.x, miner.y - 18);
+            darkCtx.arc(miner.x, miner.y - 18, beamDist, startAngle, endAngle);
+            darkCtx.closePath();
+            darkCtx.fill();
+
+            // Composite darkness over main canvas
+            ctx.drawImage(offDarkCanvas, 0, 0);
+
+            // 4. Golden Volumetric Light Beam Overlay
+            ctx.save();
+            const tintGrad = ctx.createRadialGradient(miner.x, miner.y - 18, 8, miner.x, miner.y - 18, beamDist);
+            tintGrad.addColorStop(0, 'rgba(254, 240, 138, 0.34)');
+            tintGrad.addColorStop(0.55, 'rgba(247, 147, 26, 0.12)');
+            tintGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = tintGrad;
+            ctx.beginPath();
+            ctx.moveTo(miner.x, miner.y - 18);
+            ctx.arc(miner.x, miner.y - 18, beamDist, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+
+            // 5. Dust Motes floating inside the beam
+            ctx.save();
+            dustMotes.forEach(d => {
+                const dx = d.x - miner.x;
+                const dy = d.y - (miner.y - 18);
+                const dist = Math.hypot(dx, dy);
+                const angleToDust = Math.atan2(dy, dx);
+                let diff = Math.abs(angleToDust - miner.angle);
+                if (diff > Math.PI) diff = Math.PI * 2 - diff;
+
+                if ((dist < beamDist && diff < spread) || dist < 75) {
+                    ctx.fillStyle = '#fef08a';
+                    ctx.globalAlpha = d.alpha * (1 - dist / beamDist);
+                    ctx.beginPath();
+                    ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            ctx.restore();
+        }
+
+        // ==========================================
+        // 7. MINI-MAP ACOUSTIC SONAR RENDERER
+        // ==========================================
+        function drawSonarMiniMap() {
+            sonarCtx.fillStyle = '#040906';
+            sonarCtx.fillRect(0, 0, 260, 125);
+
+            const sw = 260 / COLS;
+            const sh = 125 / ROWS;
+
+            // Draw labyrinth grid on sonar
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    const t = MAZE[r][c];
+                    if (t === 1 || t === 2) {
+                        sonarCtx.fillStyle = 'rgba(16, 185, 129, 0.22)';
+                        sonarCtx.fillRect(c * sw + 1, r * sh + 1, sw - 2, sh - 2);
+                    } else if (t === 3) {
+                        // Pulsing Golden Vault blip on sonar
+                        sonarCtx.fillStyle = '#f59e0b';
+                        sonarCtx.fillRect(c * sw + 2, r * sh + 2, sw - 4, sh - 4);
+                    }
+                }
+            }
+
+            // Draw Miner Position Blip
+            const mx = (miner.x / 900) * 260;
+            const my = (miner.y / 490) * 125;
+
+            sonarCtx.fillStyle = '#00f2fe';
+            sonarCtx.beginPath();
+            sonarCtx.arc(mx, my, 4, 0, Math.PI * 2);
+            sonarCtx.fill();
+
+            // Expanding Sonar Ping Ring around Miner
+            const pingRadius = (miner.frame % 45) * 1.1;
+            sonarCtx.strokeStyle = `rgba(0, 242, 254, ${1 - (miner.frame % 45) / 45})`;
+            sonarCtx.lineWidth = 1.5;
+            sonarCtx.beginPath();
+            sonarCtx.arc(mx, my, pingRadius, 0, Math.PI * 2);
+            sonarCtx.stroke();
+
+            // Radar Sweep Line
+            sonarCtx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
+            sonarCtx.beginPath();
+            sonarCtx.moveTo(130, 62);
+            sonarCtx.lineTo(130 + Math.cos(sonarAngle) * 140, 62 + Math.sin(sonarAngle) * 140);
+            sonarCtx.stroke();
+        }
+
+        // ==========================================
+        // 8. SPECIAL ACTIONS: DYNAMITE & JACKPOT
+        // ==========================================
+        function dropDynamiteEffect() {
+            playExplosionSound();
+            const chassis = document.getElementById('rigChassis');
+            chassis.classList.remove('shake');
+            void chassis.offsetWidth;
+            chassis.classList.add('shake');
+
+            showBubble("🧨 다이너마이트 발파!! 암반을 통째로 날려버려!", 2400);
+            logCRT("DYNAMITE DETONATED AT CURRENT SECTOR!", "warn");
+
+            for (let i = 0; i < 45; i++) {
+                const ang = Math.random() * Math.PI * 2;
+                const spd = Math.random() * 7 + 2;
+                rockSparks.push({
+                    x: miner.x,
+                    y: miner.y,
+                    vx: Math.cos(ang) * spd,
+                    vy: Math.sin(ang) * spd,
+                    life: 1.0,
+                    color: i % 2 === 0 ? '#ef4444' : '#fbbf24'
+                });
+            }
+        }
+
+        function updateCelebrationParticles() {
+            for (let i = confetti.length - 1; i >= 0; i--) {
+                const c = confetti[i];
+                c.x += c.vx;
+                c.y += c.vy;
+                c.rotation += c.rotSpeed;
+                c.vy += 0.11;
+                c.life -= 0.007;
+
+                if (c.life <= 0 || c.y > 490) {
+                    confetti.splice(i, 1);
+                    continue;
+                }
+                ctx.save();
+                ctx.translate(c.x, c.y);
+                ctx.rotate(c.rotation);
+                ctx.fillStyle = c.color;
+                ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size * 0.6);
+                ctx.restore();
+            }
+
+            for (let i = goldCoins.length - 1; i >= 0; i--) {
+                const coin = goldCoins[i];
+                coin.y += coin.vy;
+                coin.x += coin.vx;
+                coin.vy += 0.22;
+                if (coin.y > 460) {
+                    coin.y = 460;
+                    coin.vy = -coin.vy * 0.55;
+                }
+                coin.life -= 0.009;
+                if (coin.life <= 0) {
+                    goldCoins.splice(i, 1);
+                    continue;
+                }
+                ctx.font = '24px sans-serif';
+                ctx.fillText('🪙', coin.x, coin.y);
+            }
+        }
+
+        function triggerDemoJackpot() {
+            playFanfare();
+            dropDynamiteEffect();
+            miner.state = 'celebrate';
+            fullLightOn = true;
+
+            showBubble("🎉 대박!! 지하 금고에서 잠자던 비트코인 코어 발굴!! 🥳", 5500);
+            logCRT("CRITICAL HIT: BITCOIN VAULT BREACHED! (3 ASSETS)", "crit");
+
+            const banner = document.getElementById('jackpotBanner');
+            banner.classList.add('active');
+            setTimeout(() => {
+                banner.classList.remove('active');
+                fullLightOn = false;
+                miner.state = 'exploring';
+            }, 6000);
+
+            const colors = ['#f7931a', '#ffd166', '#ef4444', '#10b981', '#00f2fe', '#a855f7'];
+            for (let i = 0; i < 220; i++) {
+                confetti.push({
+                    x: Math.random() * 900,
+                    y: -20 - Math.random() * 160,
+                    vx: (Math.random() - 0.5) * 7,
+                    vy: Math.random() * 3.5 + 2,
+                    size: Math.random() * 9 + 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * Math.PI,
+                    rotSpeed: (Math.random() - 0.5) * 0.22,
+                    life: 1.0
+                });
+            }
+
+            for (let i = 0; i < 65; i++) {
+                goldCoins.push({
+                    x: Math.random() * 850 + 25,
+                    y: -50 - Math.random() * 220,
+                    vx: (Math.random() - 0.5) * 4.5,
+                    vy: Math.random() * 4 + 3,
+                    life: 2.2
+                });
+            }
+
+            document.getElementById('totalTreasuresCount').innerText = "6";
+            document.getElementById('findingsHeaderCount').innerText = "6";
+            document.getElementById('curPathDisplay').innerText = "🚨 [JACKPOT] 지하 금고 격벽 돌파 완료! 총 6건의 멀티체인 암호화폐 자산이 발굴되었습니다!";
+
+            const container = document.getElementById('findingsContainer');
+            container.innerHTML = `
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">🔑 BIP-39 멀티체인 시드 (BTC/ETH/SOL)</div>
+                        <span class="badge-tag badge-critical">CRITICAL</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>army van ... (8 words locked) ... make crunch</span>
+                        <button class="btn-mini" onclick="alert('발굴된 12단어 마스터 시드 구문:\narmy van defense carry jealous true garbage claim echo media make crunch')">👁️ 해독하기</button>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: C:\\Users\\Administrator\\Desktop\\old_backup_notes.txt</div>
+                </div>
+
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">🪙 Bitcoin 제네시스 지갑 (P2PKH)</div>
+                        <span class="badge-tag badge-high">BTC</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</span>
+                        <a class="btn-mini" href="https://mempool.space/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" target="_blank">🔍 Mempool</a>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: C:\\Users\\Administrator\\Desktop\\old_backup_notes.txt</div>
+                </div>
+
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">💎 Ethereum / EVM 지갑 (ETH/ERC-20)</div>
+                        <span class="badge-tag badge-high">ETH</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</span>
+                        <a class="btn-mini" href="https://etherscan.io/address/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" target="_blank">🔍 Etherscan</a>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: C:\\Users\\Administrator\\Documents\\eth_keystore_backup.txt</div>
+                </div>
+
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">🐕 Dogecoin 코어 지갑 (DOGE)</div>
+                        <span class="badge-tag badge-high">DOGE</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>DH5yaieqoZN36fDVciNyRueRGvGLR3mr7L</span>
+                        <a class="btn-mini" href="https://blockchair.com/dogecoin/address/DH5yaieqoZN36fDVciNyRueRGvGLR3mr7L" target="_blank">🔍 Dogechain</a>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: %APPDATA%\\Dogecoin\\wallet.dat</div>
+                </div>
+
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">🦊 MetaMask & Phantom 브라우저 볼트</div>
+                        <span class="badge-tag badge-critical">VAULT DB</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>Chrome LevelDB Encrypted Keyring (000003.ldb)</span>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: %LOCALAPPDATA%\\Google\\Chrome\\...\\nkbihfbeogaeaoehlefnkodbefgpgknn</div>
+                </div>
+
+                <div class="treasure-card">
+                    <div class="card-top">
+                        <div class="card-type">💼 Bitcoin Core 원조 지갑 (wallet.dat)</div>
+                        <span class="badge-tag badge-critical">CRITICAL</span>
+                    </div>
+                    <div class="secret-box">
+                        <span>Berkeley DB v4.8 // Magic Signature 0x00053162</span>
+                    </div>
+                    <div class="file-loc">📄 SECTOR: %APPDATA%\\Bitcoin\\wallets\\wallet.dat</div>
+                </div>
+            `;
+        }
+
+        // Turbo Steam Overclock Simulation
+        let simInterval = null;
+        let simCount = 0;
+        function startSimulatedMining() {
+            ensureAudio();
+            miner.speed = 4.2;
+            showBubble("⚙️ 증기 밸브 오버클럭!! 초고속 배관 탐색 가동! 🚀", 2600);
+            logCRT("STEAM VALVE OVERCLOCK: TURBO SPEED ENGAGED", "warn");
+
+            const sampleSectors = [
+                "C:\\Users\\AppData\\Roaming\\Bitcoin\\wallets\\wallet.dat",
+                "C:\\Users\\AppData\\Roaming\\Electrum\\wallets\\default_wallet",
+                "C:\\Users\\Documents\\2016_비트코인_백업메모.txt",
+                "C:\\Users\\Downloads\\keystore_UTC_2017.json",
+                "C:\\Users\\Desktop\\secret_mnemonic_seed.txt"
+            ];
+
+            simCount = 0;
+            if (simInterval) clearInterval(simInterval);
+            const startTime = Date.now();
+
+            simInterval = setInterval(() => {
+                simCount += Math.floor(Math.random() * 85) + 25;
+                document.getElementById('filesScannedCount').innerText = simCount.toLocaleString();
+                const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                document.getElementById('elapsedTime').innerText = elapsed + 's';
+
+                const curFile = sampleSectors[Math.floor(Math.random() * sampleSectors.length)];
+                document.getElementById('curPathDisplay').innerText = `⚙️ [OVERCLOCK SCAN] ${curFile}`;
+
+                if (Math.random() < 0.35) {
+                    logCRT(`INSPECTING: ${curFile.split('\\').pop()}`);
+                }
+
+                if (elapsed > 4.2) {
+                    clearInterval(simInterval);
+                    miner.speed = 2.3;
+                    triggerDemoJackpot();
+                }
+            }, 160);
+        }
+
+        function openSpecModal() {
+            playClinkSound();
+            document.getElementById('specModal').classList.add('open');
+            logCRT("OPENED TECHNICAL SPEC & MULTI-CHAIN MANUAL");
+        }
+
+        function closeSpecModal() {
+            playClinkSound();
+            document.getElementById('specModal').classList.remove('open');
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSpecModal();
+            }
+        });
+
+        // ==========================================
+        // 9. MAIN 60FPS GAME LOOP
+        // ==========================================
+        function gameLoop() {
+            updateWorld();
+            drawMazeWorld();
+            drawMinerUnit(ctx, miner.x, miner.y, miner.state, miner.frame, miner.angle);
+            drawDarknessAndHeadlight();
+            updateCelebrationParticles();
+            drawSonarMiniMap();
+            requestAnimationFrame(gameLoop);
+        }
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>

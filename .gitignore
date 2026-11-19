@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# 검사 결과 리포트(찾은 원문이 들어 있음) — 절대 올리지 않기
+satoshi_hunter_report.html
+satoshi_hunter/satoshi_hunter_report.html
